@@ -22,7 +22,7 @@ class TestList extends Component {
   }
 
   addTestButton(){
-    return (<Col className='main-test-list-title text-right '><Link to="/test"><i className="fa fa-plus-circle fa-2x cursor-pointer"></i></Link></Col>)
+    return (<Col className='main-test-list-title text-right '><Link to="/test/create"><i className="fa fa-plus-circle fa-2x cursor-pointer"></i></Link></Col>)
   }
 
   render() {
@@ -37,7 +37,7 @@ class TestList extends Component {
           <Row>
             <Col>
               {tests && tests.length > 0 && tests.map((test) => {
-                return <Test test={test} />
+                return <Test key={test.id} test={test} />
               })}
               { tests && tests.length === 0 && <div className='text-center'>No Tests</div>}
             </Col>

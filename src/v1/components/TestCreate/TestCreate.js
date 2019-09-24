@@ -23,7 +23,7 @@ class TestCreate extends Component {
   state = {
     title: '',
     description: '',
-    creator_email: localStorage.getItem('email') 
+    time_limit: '0'
   }
 
   handleChange(e) {
@@ -40,9 +40,9 @@ class TestCreate extends Component {
       history,
       email: creator_email,
     } = this.props;
-    const { title, description } = this.state;
+    const { title, description, time_limit } = this.state;
     try {
-      const resp = await createTest({ test: { title, description, creator_email } });
+      const resp = await createTest({ test: { title, description, creator_email, time_limit } });
       history.push('/dashboard');
       successAlertHandler(resp.resp);
     } catch (error) {
@@ -51,7 +51,8 @@ class TestCreate extends Component {
   }
 
   render() {
-    console.log('ssss', this.props);
+    const { title, description, status, time_limit } = this.state;
+    console.log('====>', this.state);
     return (
       <Row>
         <Col md={{ size: 6, offset: 3 }} className='border shadow rounded'>
@@ -60,11 +61,28 @@ class TestCreate extends Component {
             <Form>
               <FormGroup>
                 <Label for="Title">Title</Label>
-                <Input type="text" name="title" placeholder="Enter the test titile" onChange={e => this.handleChange(e)} />
+                <Input value={title} type="text" name="title" placeholder="Enter the test titile" onChange={e => this.handleChange(e)} />
               </FormGroup>
+              <Row>
+                <Col>
+                <FormGroup>
+                  <Label for="time_limit">Time limit (minutes)</Label>
+                  <Input type="number" name="time_limit" value={time_limit} onChange={e => this.handleChange(e)}/>
+                </FormGroup>
+                </Col>
+                {/* <Col>
+                  <FormGroup>
+                    <Label for="status">Status</Label>
+                    <Input type="select" value={status} name="status" onChange={e => this.handleChange(e)}>
+                      <option>Draft</option>
+                      <option>Published</option>
+                    </Input>
+                  </FormGroup>
+                </Col> */}
+              </Row>
               <FormGroup>
                 <Label for="Description">Description</Label>
-                <Input type="textarea" name="description" placeholder="Enter the test description" onChange={e => this.handleChange(e)}/>
+                <Input type="textarea" name="description" value={description} placeholder="Enter the test description" onChange={e => this.handleChange(e)} />
               </FormGroup>
             </Form>
             <Button color="secondary" size="sm" block className='py-2' onClick={() => this.submit()}>SUBMIT</Button>
@@ -77,7 +95,7 @@ class TestCreate extends Component {
 
 const mapStateToProps = state => {
   const { email } = state.user;
-  return {email};
+  return { email };
 }
 
 const actions = {

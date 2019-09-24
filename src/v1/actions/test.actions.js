@@ -58,7 +58,7 @@ const testListFailure = error => {
 export const listTest = body => (dispatch) => {
   
   // dispatch(apiRequestPending());
-  return api.get('/test', { ...body })
+  return api.get('/tests', { ...body })
     .then(resp => {
       
       // dispatch(apiRequestComplete());

@@ -10,3 +10,15 @@ body{
 .cursor-pointer{
   cursor: pointer;
 }
+
+.display-inline{
+  display: inline-block;
+}
+
+.w-10{
+  width: 3%;
+}
+
+.w-80{
+  width: 97%;
+}

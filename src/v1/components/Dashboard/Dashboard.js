@@ -5,14 +5,16 @@ import {
 } from 'reactstrap';
 import { Route } from "react-router-dom";
 import TestList from '../TestList';
+import QuestionList from '../QuestionList';
 import TestCreate from '../TestCreate';
+import QuestionCreate from '../QuestionCreate';
 import { connect } from 'react-redux';
 import {
   getCurrentUser
 } from '../../actions/user.actions';
 
 class Dashboard extends Component {
-  componentDidMount(){
+  componentDidMount() {
     const { getCurrentUser } = this.props;
     getCurrentUser()
   }
@@ -21,8 +23,10 @@ class Dashboard extends Component {
     return (
       <Row className='dashboard-row p-4'>
         <Col>
-        <Route exact path="/test/create" component={TestCreate} />
-        <Route exact path="/dashboard" component={TestList} />
+          <Route exact path="/dashboard" component={TestList} />
+          <Route exact path="/test/create" component={TestCreate} />
+          <Route exact path="/test/:id/questions" component={QuestionList} />
+          <Route exact path="/test/:id/question/create" component={QuestionCreate} />
         </Col>
       </Row>
     )

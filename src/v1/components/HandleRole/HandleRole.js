@@ -1,10 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 
-export default function HandleRole(props) {
-  const { rolesAllowed, userRole, componentFun } = props;
-  if (rolesAllowed.includes(userRole)) {
+const HandleRole = (props) => {
+  const { rolesAllowed, componentFun, role } = props;
+  if (rolesAllowed.includes(role)) {
     return componentFun();
   } else {
     return <React.Fragment/>;
   }
 }
+const mapStateToProps = (state) => {
+  const { role } = state.user;
+  return { role };
+}
+
+export default connect(mapStateToProps, null)(HandleRole);
