@@ -1,18 +1,59 @@
 import React, { Component } from 'react';
 import {
   Row,
-  Col
+  Col,
+  Button,
 } from 'reactstrap';
 import {
   Link
 } from 'react-router-dom';
+import HandleRole from '../../HandleRole';
 
 export default class Test extends Component {
+  renderTestStatus = this.renderTestStatus.bind(this);
+  renderAdminQuestionsCount = this.renderAdminQuestionsCount.bind(this);
+  renderCandidateQuestionsCount = this.renderCandidateQuestionsCount.bind(this);
+
+  renderTestStatus() {
+    const { test } = this.props;
+    return (
+      <Col className='text-center'>
+        <div>Status</div>
+        <div className={test.status === 'Draft' ? 'text-danger' : 'text-secondary'}>{test.status}</div>
+      </Col>)
+  }
+
+  renderTakeTestButton() {
+    return (
+      <Col className='text-right'>
+        <Button>Take test</Button>
+      </Col>)
+  }
+
+  renderEditDeleteButton() {
+    return (
+      <Col className='text-right'>
+        <div className='h-100 py-2'>
+          <i className="fa fa-pencil cursor-pointer mx-2"></i>
+          <i className="fa fa-trash cursor-pointer mx-2"></i>
+        </div>
+      </Col>)
+  }
+
+  renderCandidateQuestionsCount() {
+    const { test } = this.props;
+    return (<div><small>{test.questions.length}</small></div>)
+  }
+
+  renderAdminQuestionsCount() {
+    const { test } = this.props;
+    return (<Link to={`/test/${test.id}/questions`}><small>{test.questions.length}</small></Link>)
+  }
 
   render() {
     const { test } = this.props;
     return (
-      <Row className='border-top py-2'>
+      <Row className='py-2 border-top'>
         <Col>
           <div>{test.title}</div>
           <div>
@@ -22,23 +63,15 @@ export default class Test extends Component {
         <Col className='text-center'>
           <div>Questions</div>
           <div>
-            <Link to={`/test/${test.id}/questions`}><small>{test.questions.length}</small></Link>
+            <HandleRole rolesAllowed={['1']} componentAllowedFn={this.renderAdminQuestionsCount} otherComponentFn={this.renderCandidateQuestionsCount} />
           </div>
         </Col>
         <Col className='text-center'>
           <div>Time Limit (mins)</div>
           <div className='text-danger'>{test.time_limit}</div>
         </Col>
-        <Col className='text-center'>
-        <div>Status</div>
-        <div className={test.status === 'Draft' ? 'text-danger' : 'text-secondary'}>{test.status}</div>
-        </Col>
-        <Col className='text-right'>
-          <div className='h-100 py-2'>
-            <i className="fa fa-pencil cursor-pointer mx-2"></i>
-            <i className="fa fa-trash cursor-pointer mx-2"></i>
-          </div>
-        </Col>
+        <HandleRole rolesAllowed={['1']} componentAllowedFn={this.renderTestStatus} />
+        <HandleRole rolesAllowed={['1']} componentAllowedFn={this.renderEditDeleteButton}  otherComponentFn={this.renderTakeTestButton} />
       </Row>
     )
   }

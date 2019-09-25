@@ -30,14 +30,14 @@ class TestList extends Component {
     return (
       <Row className='border shadow rounded'>
         <Col>
-          <Row className='py-2 bg-light'>
+          <Row className='py-2 bg-light border-bottom'>
             <Col className='main-test-list-title'>TESTS</Col>
-            <HandleRole rolesAllowed={['1']} userRole={role} componentFun={this.addTestButton} />
+            <HandleRole rolesAllowed={['1']} componentAllowedFn={this.addTestButton} />
           </Row>
           <Row>
             <Col>
               {tests && tests.length > 0 && tests.map((test) => {
-                return <Test key={test.id} test={test} />
+                return <Test role={role} key={test.id} test={test} />
               })}
               { tests && tests.length === 0 && <div className='text-center'>No Tests</div>}
             </Col>

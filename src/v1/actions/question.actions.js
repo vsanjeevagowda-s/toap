@@ -36,4 +36,37 @@ export const listQuestion = test_id => (dispatch) => {
       
       return Promise.reject(dispatch(questionListFailure(error.error)));
     })
+};
+
+
+const questionCreateSuccess = resp => {
+  
+  return{
+    type: QUESTION_CREATE_SUCCESS,
+    resp
+  }};
+
+const questionCreateFailure = error => {
+  
+  return {
+    type: QUESTION_CREATE_FAILURE,
+    error
+  }};
+
+export const createQuestion = (body, test_id) => (dispatch) => {
+  
+  // dispatch(apiRequestPending());
+  return api.post(`/test/${test_id}/question`, { ...body })
+    .then(resp => {
+      
+      // dispatch(apiRequestComplete());
+      
+      return Promise.resolve(dispatch(questionCreateSuccess(resp)))
+    })
+    .catch(error => {
+      
+      // dispatch(apiRequestComplete());
+      
+      return Promise.reject(dispatch(questionCreateFailure(error.error)));
+    })
 }

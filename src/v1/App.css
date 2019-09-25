@@ -11,14 +11,18 @@ body{
   cursor: pointer;
 }
 
-.display-inline{
+.display-inline-block{
   display: inline-block;
 }
 
-.w-10{
+.w-3{
   width: 3%;
 }
 
-.w-80{
+.w-97{
   width: 97%;
+}
+
+.w-94{
+  width: 94%;
 }

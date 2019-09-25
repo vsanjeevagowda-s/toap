@@ -64,7 +64,7 @@ class App extends Component {
       <Fragment>
         {(message || error) && <AlertWrapper message={message} error={error} />}
         <Container fluid>
-          <Header />
+          {/* <Header /> */}
           {pending ? <LoadingSpinner /> : <Main token={token} />}
         </Container>
       </Fragment>

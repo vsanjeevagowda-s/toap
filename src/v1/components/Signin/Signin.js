@@ -39,7 +39,7 @@ class Signin extends Component {
   constructor(props){
     super(props);
     this.state = {
-      email: 'admin@yopmail.com',
+      email: 'candidate@yopmail.com',
       password: 'password'
     }
   }
@@ -48,7 +48,6 @@ class Signin extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    console.log('state', this.state);
   }
 
   signin = () =>{

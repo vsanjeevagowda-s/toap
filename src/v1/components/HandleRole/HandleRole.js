@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const HandleRole = (props) => {
-  const { rolesAllowed, componentFun, role } = props;
+  const { rolesAllowed, componentAllowedFn, role, otherComponentFn  } = props;
   if (rolesAllowed.includes(role)) {
-    return componentFun();
+    return componentAllowedFn();
   } else {
-    return <React.Fragment/>;
+    return otherComponentFn ? otherComponentFn() : <React.Fragment/>;
   }
 }
 const mapStateToProps = (state) => {

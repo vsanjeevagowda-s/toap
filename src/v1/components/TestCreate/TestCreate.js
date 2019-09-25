@@ -51,8 +51,7 @@ class TestCreate extends Component {
   }
 
   render() {
-    const { title, description, status, time_limit } = this.state;
-    console.log('====>', this.state);
+    const { title, description, time_limit } = this.state;
     return (
       <Row>
         <Col md={{ size: 6, offset: 3 }} className='border shadow rounded'>
@@ -70,15 +69,6 @@ class TestCreate extends Component {
                   <Input type="number" name="time_limit" value={time_limit} onChange={e => this.handleChange(e)}/>
                 </FormGroup>
                 </Col>
-                {/* <Col>
-                  <FormGroup>
-                    <Label for="status">Status</Label>
-                    <Input type="select" value={status} name="status" onChange={e => this.handleChange(e)}>
-                      <option>Draft</option>
-                      <option>Published</option>
-                    </Input>
-                  </FormGroup>
-                </Col> */}
               </Row>
               <FormGroup>
                 <Label for="Description">Description</Label>

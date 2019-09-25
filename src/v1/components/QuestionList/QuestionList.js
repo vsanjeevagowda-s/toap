@@ -14,6 +14,7 @@ import {
 } from '../../actions/question.actions';
 
 class QuestionList extends Component {
+  addTestButton = this.addTestButton.bind(this);
 
   componentDidMount() {
     const { listQuestion, match: { params: { id } } } = this.props;
@@ -21,26 +22,27 @@ class QuestionList extends Component {
   }
 
   addTestButton() {
+    const { match: { params: { id } } } = this.props;
     return (
-      <Col className='main-test-list-title text-right '><Link to={`/test/${1}/question/create`}><i className="fa fa-plus-circle fa-2x cursor-pointer"></i></Link></Col>
+      <Col className='main-test-list-title text-right '><Link to={`/test/${id}/question/create`}><i className="fa fa-plus-circle fa-2x cursor-pointer"></i></Link></Col>
     )
   }
 
   render() {
     const { questions } = this.props;
-    console.log('----', questions);
     return (
       <Row className='border shadow rounded'>
         <Col>
-          <Row className='py-2 bg-light'>
+          <Row className='py-2 bg-light border-bottom'>
             <Col className='main-test-list-title'>QUESTIONS</Col>
-            <HandleRole rolesAllowed={['1']} componentFun={this.addTestButton} />
+            <HandleRole rolesAllowed={['1']} componentAllowedFn={this.addTestButton} />
           </Row>
           {
             questions && questions.length > 0 && questions.map((question, index) => {
-              return <Question question={question} index={index} />
+              return <Question key={question.id} question={question} index={index} />
             })
           }
+          { questions && questions.length === 0 && <div className='text-center'>No Questions</div>}
         </Col>
       </Row>
     )
