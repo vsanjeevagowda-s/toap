@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import {
   Row,
   Col,
-  Button,
 } from 'reactstrap';
 import {
   Link
 } from 'react-router-dom';
 import HandleRole from '../../HandleRole';
 
-export default class Test extends Component {
+export default class TestItem extends Component {
   renderTestStatus = this.renderTestStatus.bind(this);
   renderAdminQuestionsCount = this.renderAdminQuestionsCount.bind(this);
   renderCandidateQuestionsCount = this.renderCandidateQuestionsCount.bind(this);
+  renderTakeTestButton = this.renderTakeTestButton.bind(this);
 
   renderTestStatus() {
     const { test } = this.props;
@@ -24,9 +24,11 @@ export default class Test extends Component {
   }
 
   renderTakeTestButton() {
+    const { test } = this.props;
     return (
       <Col className='text-right'>
-        <Button>Take test</Button>
+        <Link className='btn btn-secondary text-light sm cursor-pointer' to={`/test/${test.id}/testInstruction`}>Take test
+        </Link>
       </Col>)
   }
 
@@ -71,7 +73,7 @@ export default class Test extends Component {
           <div className='text-danger'>{test.time_limit}</div>
         </Col>
         <HandleRole rolesAllowed={['1']} componentAllowedFn={this.renderTestStatus} />
-        <HandleRole rolesAllowed={['1']} componentAllowedFn={this.renderEditDeleteButton}  otherComponentFn={this.renderTakeTestButton} />
+        <HandleRole rolesAllowed={['1']} componentAllowedFn={this.renderEditDeleteButton} otherComponentFn={this.renderTakeTestButton} />
       </Row>
     )
   }

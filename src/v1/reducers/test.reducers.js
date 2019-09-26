@@ -1,10 +1,14 @@
 import {
   TEST_LIST_SUCCESS,
   TEST_LIST_FAILURE,
+  GET_TEST_DETAILS_SUCCESS,
+  GET_TEST_DETAILS_FAILURE,
 } from '../actions/test.actions';
 
 const initialState = {
   tests: [],
+  test: {},
+  testStartedFlag : false
 }
 
 const test = (state = initialState, action) => {
@@ -19,6 +23,16 @@ const test = (state = initialState, action) => {
       ...state,
       tests: []
     }
+    case GET_TEST_DETAILS_SUCCESS:
+      return {
+        ...state,
+        test: action.resp.test,
+      }
+    case GET_TEST_DETAILS_FAILURE:
+      return {
+        ...state,
+        test: {},
+      }
     default:
         
     return state

@@ -7,7 +7,7 @@ import {
   Link
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Test from './Test';
+import TestItem from './TestItem';
 import HandleRole from '../HandleRole';
 import {
   listTest
@@ -37,7 +37,7 @@ class TestList extends Component {
           <Row>
             <Col>
               {tests && tests.length > 0 && tests.map((test) => {
-                return <Test role={role} key={test.id} test={test} />
+                return <TestItem role={role} key={test.id} test={test} />
               })}
               { tests && tests.length === 0 && <div className='text-center'>No Tests</div>}
             </Col>

@@ -9,6 +9,7 @@ import QuestionList from '../QuestionList';
 import TestCreate from '../TestCreate';
 import QuestionCreate from '../QuestionCreate';
 import TestInstruction from '../TestInstruction';
+import TestPage from '../TestPage';
 import { connect } from 'react-redux';
 import {
   getCurrentUser
@@ -28,7 +29,8 @@ class Dashboard extends Component {
           <Route exact path="/test/create" component={TestCreate} />
           <Route exact path="/test/:id/questions" component={QuestionList} />
           <Route exact path="/test/:id/question/create" component={QuestionCreate} />
-          <Route exact path="/testInstruction" component={TestInstruction} />
+          <Route exact path="/test/:id/testInstruction" component={TestInstruction} />
+          <Route exact path="/testPage" component={TestPage} />
         </Col>
       </Row>
     )

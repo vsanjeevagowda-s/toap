@@ -7,6 +7,11 @@ export const TEST_CREATE_SUCCESS = 'TEST_CREATE_SUCCESS';
 export const TEST_CREATE_FAILURE = 'TEST_CREATE_FAILURE';
 export const TEST_LIST_SUCCESS = 'TEST_LIST_SUCCESS';
 export const TEST_LIST_FAILURE = 'TEST_LIST_FAILURE';
+export const GET_TEST_DETAILS_SUCCESS = 'GET_TEST_DETAILS_SUCCESS';
+export const GET_TEST_DETAILS_FAILURE = 'GET_TEST_DETAILS_FAILURE';
+export const TEST_STARTED_SUCCESS = 'TEST_STARTED_SUCCESS';
+export const GET_QUESTION_LIST_SUCCESS = 'GET_QUESTION_LIST_SUCCESS';
+export const GET_QUESTION_LIST_FAILURE = 'GET_QUESTION_LIST_FAILURE';
 
 const testCreateSuccess = resp => {
   
@@ -58,7 +63,7 @@ const testListFailure = error => {
 export const listTest = body => (dispatch) => {
   
   // dispatch(apiRequestPending());
-  return api.get('/tests', { ...body })
+  return api.get('/tests')
     .then(resp => {
       
       // dispatch(apiRequestComplete());
@@ -72,3 +77,42 @@ export const listTest = body => (dispatch) => {
       return Promise.reject(dispatch(testListFailure(error.error)));
     })
 }
+
+const getTestDetailsSuccess = resp => {
+  
+  return{
+    type: GET_TEST_DETAILS_SUCCESS,
+    resp
+  }};
+
+const getTestDetailsFailure = error => {
+  
+  return {
+    type: GET_TEST_DETAILS_FAILURE,
+    error
+  }};
+
+export const getTestDetails = id => (dispatch) => {
+  // dispatch(apiRequestPending());
+  return api.get(`/tests/${id}`)
+    .then(resp => {
+      
+      // dispatch(apiRequestComplete());
+      
+      return Promise.resolve(dispatch(getTestDetailsSuccess(resp)))
+    })
+    .catch(error => {
+      
+      // dispatch(apiRequestComplete());
+      
+      return Promise.reject(dispatch(getTestDetailsFailure(error.error)));
+    })
+};
+
+
+export const startTest = flag => dispatch => {
+  dispatch({ type: TEST_STARTED_SUCCESS, flag })
+}
+
+
+
