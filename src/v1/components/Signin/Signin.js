@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import {
+  Link
+} from 'react-router-dom';
+import {
   signin
 } from '../../actions/signin.actions';
 import {
@@ -78,12 +81,18 @@ class Signin extends Component {
           <Col xs={12} sm={4} ></Col>
           <Col xs={12} sm={4} >
             <Form >
-              <h4 className='text-center mt-4 mb-4'>Sign-In</h4>
+              <h4 className='text-center mt-4 mb-4'>Sign In</h4>
               <FormGroupWrapper placeholder='Email' name='email' type='email' value={email} handleChange={this.handleChange} />
               <FormGroupWrapper placeholder='Password' name='password' type='password' value={password} handleChange={this.handleChange} />
               <FormGroup row>
                 <Col sm={{size: 9, offset: 3}}>
                   <Button block color='primary' onClick={this.signin}>Login</Button>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label sm={3}></Label>
+                <Col sm={9}>
+                Don't have account? <Link to='/register'> Register</Link>
                 </Col>
               </FormGroup>
             </Form>

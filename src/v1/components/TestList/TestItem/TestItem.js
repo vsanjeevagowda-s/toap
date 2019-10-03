@@ -27,7 +27,7 @@ export default class TestItem extends Component {
     const { test } = this.props;
     return (
       <Col className='text-right'>
-        <Link className='btn btn-secondary text-light sm cursor-pointer' to={`/test/${test.id}/testInstruction`}>Take test
+        <Link className='btn btn-secondary text-light sm cursor-pointer' to={`/tests/${test.id}/testInstruction`}>Take test
         </Link>
       </Col>)
   }
@@ -49,7 +49,7 @@ export default class TestItem extends Component {
 
   renderAdminQuestionsCount() {
     const { test } = this.props;
-    return (<Link to={`/test/${test.id}/questions`}><small>{test.questions.length}</small></Link>)
+    return (<Link to={`/tests/${test.id}/questions`}><small>{test.questions.length}</small></Link>)
   }
 
   render() {

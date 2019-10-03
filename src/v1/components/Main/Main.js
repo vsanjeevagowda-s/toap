@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route } from "react-router-dom";
 import Signin from '../Signin';
 import Dashboard from '../Dashboard';
+import Register from '../Register';
 
 class Main extends Component {
 
@@ -19,6 +20,7 @@ class Main extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Signin} />
+        <Route exact path="/register" component={Register} />
         {token && <Dashboard />}
       </Switch>
     )

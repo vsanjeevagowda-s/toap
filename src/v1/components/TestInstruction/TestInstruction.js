@@ -20,7 +20,6 @@ class TestInstruction extends Component {
 
   startTest(){
     const { startTest } = this.props;
-    debugger
     startTest(true);
   }
 
