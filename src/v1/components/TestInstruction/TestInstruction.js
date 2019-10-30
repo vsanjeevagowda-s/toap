@@ -55,7 +55,8 @@ class TestInstruction extends Component {
               <Link className='mx-2 btn btn-danger border-0 px-4' to={{
                 pathname: '/testPage',
                 state:{
-                  testId: test._id
+                  testId: test._id,
+                  time_limit: test.time_limit
                 }
               }} onClick={this.startTest}>Start Test</Link>
               <Link className='mx-2 btn btn-secondary border-0 px-4' to='/dashboard'>Cancel</Link>

@@ -94,10 +94,3 @@ export const getPreviousQuestion = () => dispatch => {
 export const storeSelectedOption = opt => dispatch => {
   return dispatch({ type: STORE_SELECTED_OPTION, opt });
 };
-
-export const saveUserTestResponse = (body, user_id) => dispatch => {
-  debugger
-return api.put(`/users/${user_id}/testResponse`, { ...body })
-.then(resp => {})
-.catch(error => {})
-};

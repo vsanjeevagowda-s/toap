@@ -24,7 +24,7 @@ class QuestionList extends Component {
   addTestButton() {
     const { match: { params: { id } } } = this.props;
     return (
-      <Col className='main-test-list-title text-right '><Link to={`/test/${id}/question/create`}><i className="fa fa-plus-circle fa-2x cursor-pointer"></i></Link></Col>
+      <Col className='main-test-list-title text-right '><Link to={`/tests/${id}/question/create`}><i className="fa fa-plus-circle fa-2x cursor-pointer"></i></Link></Col>
     )
   }
 

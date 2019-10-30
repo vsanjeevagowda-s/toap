@@ -47,9 +47,10 @@ class Timer extends Component {
   }
 
   render() {
+    const { time_limit } = this.props;
     return (
       <React.Fragment>
-        <Countdown date={Date.now() + 10000} onComplete={this.onTimerEnds} />
+        <Countdown date={Date.now() + (parseInt(time_limit) * 60000)} onComplete={this.onTimerEnds} />
         {this.timedOutModal()}
       </React.Fragment>
     )

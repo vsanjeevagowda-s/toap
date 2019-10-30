@@ -13,8 +13,10 @@ import {
   getNextQuestion,
   getPreviousQuestion,
   storeSelectedOption,
-  saveUserTestResponse,
 } from '../../actions/question.actions';
+import {
+  saveUserTestResponse
+} from '../../actions/test.actions';
 const optionsIndex = {
   0: 'A',
   1: 'B',
@@ -35,8 +37,9 @@ class TestPage extends Component {
 
   nextQuestion() {
     const { location: { state: { testId } }, getNextQuestion, saveUserTestResponse, questions, user_id } = this.props;
-    const testObj = { test :{ testId, questions } };
-    saveUserTestResponse(testObj, user_id);
+    // const testObj = { test :{ testId, questions } };
+    // debugger
+    // saveUserTestResponse(testObj, user_id);
     getNextQuestion();
   }
 
@@ -46,12 +49,12 @@ class TestPage extends Component {
   }
 
   storeSelectedOption(opt){
-    const { storeSelectedOption } = this.props;
+    const { location: { state: { testId } }, storeSelectedOption, saveUserTestResponse, questions, user_id } = this.props;
+    
     storeSelectedOption(opt)
   }
 
   onEndTest(){
-    debugger
   }
 
   render() {
@@ -60,7 +63,7 @@ class TestPage extends Component {
       question: { options },
       questionIndex,
       questionsLength,
-      location: { state: { testId } }
+      location: { state: { testId, time_limit } }
     } = this.props;
     return (
       <Row className='test-page-row'>
@@ -96,7 +99,7 @@ class TestPage extends Component {
         <Col md={{ size: 2 }} className='text-center'>
           <div>Time Remaining</div>
           <div className='count-down-timer'>
-            <Timer testId={testId} /><br />
+            <Timer testId={testId} time_limit={time_limit} /><br />
             <Button className='my-2' color="danger" onClick={this.onEndTest}>End Test</Button>
           </div>
         </Col>

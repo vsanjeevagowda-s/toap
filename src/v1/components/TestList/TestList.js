@@ -18,7 +18,6 @@ class TestList extends Component {
 
   componentDidMount(){
     const { listTest } = this.props;
-    debugger
     listTest();
   }
 

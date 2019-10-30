@@ -18,14 +18,11 @@ const registerFailure = error => {
   }};
 
 export const register = body => dispatch => {
-  debugger
   return api.post('/register', { ...body })
   .then(resp => {
-    debugger
     return Promise.resolve(dispatch(registerSuccess(resp)))
   })
   .catch(error => {    
-    debugger
     return Promise.reject(dispatch(registerFailure(error.error)));
   })
 }
