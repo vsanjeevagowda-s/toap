@@ -14,7 +14,7 @@ const user = (state = initialState, action) => {
       console.log('88888888 =>', action.resp);
     return {
       ...state,
-      user_id: action.resp.id,
+      userId: action.resp.id,
       email: action.resp.email,
       role: action.resp.role,
     }

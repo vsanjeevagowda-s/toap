@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   getTestDetails,
-  startTest
+  startTest,
+  saveUserTestResponse,
 } from '../../actions/test.actions';
 
 class TestInstruction extends Component {
@@ -19,8 +20,9 @@ class TestInstruction extends Component {
   }
 
   startTest(){
-    const { startTest } = this.props;
-    startTest(true);
+    const { saveUserTestResponse, match: { params: { id } }, userId } = this.props;
+    saveUserTestResponse({test: {}}, userId, id)
+    // startTest(true);
   }
 
   render() {
@@ -70,12 +72,15 @@ class TestInstruction extends Component {
 
 const mapStateToProps = state => {
   const { test, testStartedFlag } = state.test;
-  return { test, testStartedFlag };
+  const { questions } = state.question;
+  const { userId } = state.user;
+  return { test, testStartedFlag, questions, userId };
 }
 
 const actions = {
   getTestDetails,
-  startTest
+  startTest,
+  saveUserTestResponse
 }
 
 export default connect(mapStateToProps, actions)(TestInstruction);

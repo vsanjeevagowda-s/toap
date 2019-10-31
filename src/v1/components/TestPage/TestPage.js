@@ -27,6 +27,7 @@ const optionsIndex = {
 class TestPage extends Component {
   nextQuestion = this.nextQuestion.bind(this);
   previousQuestion = this.previousQuestion.bind(this);
+  optionClass = this.optionClass.bind(this);
   componentDidMount() {
     const { location: { state: { testId } }, listQuestion, getFirstQuestion } = this.props;
     listQuestion(testId)
@@ -36,10 +37,10 @@ class TestPage extends Component {
   }
 
   nextQuestion() {
-    const { location: { state: { testId } }, getNextQuestion, saveUserTestResponse, questions, user_id } = this.props;
+    const { getNextQuestion } = this.props;
     // const testObj = { test :{ testId, questions } };
-    // debugger
-    // saveUserTestResponse(testObj, user_id);
+  
+    // saveUserTestResponse(testObj, userId);
     getNextQuestion();
   }
 
@@ -49,12 +50,18 @@ class TestPage extends Component {
   }
 
   storeSelectedOption(opt){
-    const { location: { state: { testId } }, storeSelectedOption, saveUserTestResponse, questions, user_id } = this.props;
+    const { location: { state: { testId } }, storeSelectedOption, saveUserTestResponse, questions, userId } = this.props;
     
     storeSelectedOption(opt)
+    const body = {test: { testId, questions }};
+    saveUserTestResponse(body, userId, testId)
   }
 
   onEndTest(){
+  }
+
+  optionClass(question, option){
+    return `border w-94 display-inline-block rounded p-2 my-2 cursor-pointer ${(question.myAnswer === option.title) ? 'bg-secondary text-light' : ''}`
   }
 
   render() {
@@ -82,7 +89,7 @@ class TestPage extends Component {
                  <div key={option.id}>
                    <div className='w-3 display-inline-block text-center p-2 my-2'>{optionsIndex[index]}.
                  </div>
-                   <div className={`border w-94 display-inline-block rounded p-2 my-2 cursor-pointer ${(question.myAnswer === option.title) ? 'bg-secondary text-light' : ''}`} onClick={() => this.storeSelectedOption(option)}>
+                   <div className={this.optionClass( question ,option)} onClick={() => this.storeSelectedOption(option)}>
                      {option.title}
                    </div>
                  </div>
@@ -110,8 +117,8 @@ class TestPage extends Component {
 
 const mapStateToProps = state => {
   const { question, questionIndex, questionsLength, questions } = state.question;
-  const { user_id } = state.user;
-  return { question, questions, questionIndex, questionsLength, user_id };
+  const { userId } = state.user;
+  return { question, questions, questionIndex, questionsLength, userId };
 }
 
 const actions = {

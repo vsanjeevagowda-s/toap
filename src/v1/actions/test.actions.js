@@ -12,6 +12,8 @@ export const GET_TEST_DETAILS_FAILURE = 'GET_TEST_DETAILS_FAILURE';
 export const TEST_STARTED_SUCCESS = 'TEST_STARTED_SUCCESS';
 export const GET_QUESTION_LIST_SUCCESS = 'GET_QUESTION_LIST_SUCCESS';
 export const GET_QUESTION_LIST_FAILURE = 'GET_QUESTION_LIST_FAILURE';
+export const SAVE_USER_TEST_RESPONSE_SUCCESS = 'SAVE_USER_TEST_RESPONSE_SUCCESS';
+export const SAVE_USER_TEST_RESPONSE_FAILURE = 'SAVE_USER_TEST_RESPONSE_FAILURE';
 
 const testCreateSuccess = resp => {
 
@@ -120,10 +122,31 @@ export const startTest = flag => dispatch => {
   dispatch({ type: TEST_STARTED_SUCCESS, flag })
 }
 
-export const saveUserTestResponse = (body, user_id) => dispatch => {
+const saveUserTestResponseSuccess = resp => {
+  return {
+    type: SAVE_USER_TEST_RESPONSE_SUCCESS,
+    resp,
+  }
+}
+
+const saveUserTestResponseFailure = error => {
+  return {
+    type: SAVE_USER_TEST_RESPONSE_FAILURE,
+    error,
+  }
+}
+
+
+export const saveUserTestResponse = (body, userId, testId) => dispatch => {
   debugger
-  return api.put(`/users/${user_id}/testResponse`, { ...body })
-    .then(resp => { })
-    .catch(error => { })
+  return api.put(`/users/${userId}/tests/${testId}/saveResponse`, { ...body })
+    .then(resp => {
+      dispatch(saveUserTestResponseSuccess(resp))
+      return Promise.resolve(resp);
+    })
+    .catch(error => {
+      dispatch(saveUserTestResponseFailure(error))
+      return Promise.resolve(error);
+    })
 };
 
