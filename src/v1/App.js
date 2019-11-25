@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
@@ -44,6 +45,10 @@ const AlertWrapper = ({ message, error }) => {
 }
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.logoutUser = this.logoutUser.bind(this);
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     const { error, message, pending, token } = this.props;
@@ -56,6 +61,12 @@ class App extends Component {
     
     return false;
   }
+  
+  logoutUser = () => {
+    const { history: { push } } = this.props;
+    localStorage.clear();
+    push('/')
+  }
 
   render() {
     
@@ -64,7 +75,7 @@ class App extends Component {
       <Fragment>
         {(message || error) && <AlertWrapper message={message} error={error} />}
         <Container fluid>
-          {/* <Header /> */}
+          <Header logoutUser={this.logoutUser} />
           {pending ? <LoadingSpinner /> : <Main token={token} />}
         </Container>
       </Fragment>
@@ -82,4 +93,4 @@ const mapStateToProps = state => {
 
 
 
-export default connect(mapStateToProps, null)(App);
+export default withRouter(connect(mapStateToProps, null)(App));

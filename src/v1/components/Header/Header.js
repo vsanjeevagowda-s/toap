@@ -4,11 +4,14 @@ import {
   Col
 } from 'reactstrap';
 
-export default function Header() {
+export default function Header({ logoutUser }) {
   return (
     <Row className='border-bottom bg-dark text-light shadow-sm'>
       <Col>
-        <h2 className='m-0 py-1'>TOAP</h2>
+        <div className='h3'>TOAP</div>
+      </Col>
+      <Col>
+        <span class="fa fa-sign-out float-right align-middle"onClick={() => logoutUser()}></span>
       </Col>
     </Row>
   )
